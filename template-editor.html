@@ -4,65 +4,146 @@
 <head>
     <title>Cricket Scorecard Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
+    <style>
+        .canvas-container {
+            display: none
+        }
+    </style>
+    <script src="template.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 </head>
 
 <body>
     <h1>Cricket Scorecard Generator</h1>
-    <canvas id="scorecardCanvas" width="800" height="600"></canvas>
-    <form id="scoreForm">
+    <form id="firstForm">
         <label for="template">Template:</label>
         <select id="template">
-            <option value="0">Template 1</option>
         </select>
         <br>
-        <label for="team1Score">Team 1 Score:</label>
-        <input id="team1Score" name="team1Score">
-        <br>
-        <label for="team2Score">Team 2 Score:</label>
-        <input id="team2Score" name="team2Score">
-        <br>
-        <input type="submit" value="Generate Scorecard">
+        <input type="submit" value="Pick Template">
     </form>
+    <form id="secondForm" style="display:none">
+        <div id="formFeilds"></div>
+    </form>
+    <canvas style="display:none" id="scorecardCanvas"></canvas>
+    <div id="preview"></div>
 
     <script>
-        var templates = [{ url: 'https://dummyimage.com/640x360/fff/aaa', score1Pos: { left: 100, top: 100 },score2Pos: { left: 200, top: 150 } }]
-        // Create a Fabric.js canvas object
-        var canvas = new fabric.Canvas('scorecardCanvas');
+        var urlHash = window.location.hash.replace("#", "").split("&");
+        var urlHashArrayed = {};
+        for (var i = 0; i < urlHash.length; i++) {
+            var split = urlHash[i].split("=");
+            urlHashArrayed[split[0]] = split[1];
+        }
+        function convertFormToKeyValuePairString(formId) {
+            var form = document.getElementById(formId);
 
-        // Load the template image onto the canvas
-        fabric.Image.fromURL(templates[0].url, function (img) {
-            img.crossOrigin="anonymous"
-            canvas.add(img);
-        }, { crossOrigin: 'Anonymous' });
+            var formData = {};
 
-        // Handle form submission
-        document.getElementById('scoreForm').addEventListener('submit', function (event) {
+            for (var i = 0; i < form.elements.length; i++) {
+                var element = form.elements[i];
+                formData[element.name] = element.value;
+            }
+
+            var keyValuePairs = [];
+            for (var key in formData) {
+                if (key && formData[key]) {
+                    keyValuePairs.push(key + '=' + encodeURIComponent(formData[key]));
+                }
+            }
+
+            // Return the key-value pair string
+            return keyValuePairs.join('&');
+        }
+
+        for (i = 0; i < templates.length; i++) {
+            var option = document.createElement('option');
+            option.value = i;
+            option.text = templates[i].name;
+            if (urlHashArrayed['template']) {
+                option.selected = true;
+            }
+            document.getElementById("template").add(option);
+        }
+
+        // // Handle form submission
+        document.getElementById('firstForm').addEventListener('submit', function (event) {
             event.preventDefault();
+            window.history.pushState(null, null, '#template=' + document.getElementById('template').value);
 
-            // Get the form inputs
-            var team1Score = (document.getElementById('team1Score').value);
-            var team2Score = (document.getElementById('team2Score').value);
-            var template = parseInt(document.getElementById('template').value);
-
-            // Get the text objects on the canvas
-            var text = new fabric.Text(team1Score, templates[template].score1Pos);
-            canvas.add(text);
-
-            var text2 = new fabric.Text(team2Score, templates[template].score2Pos);
-            canvas.add(text2);
-
-
-            // Render the canvas to generate the result image
-            canvas.renderAll();
-
-            // Convert the canvas to a data URL
-            var resultImage = canvas.toDataURL();
-
-            // Display the result image to the user
-            var resultImageElement = document.createElement('img');
-            resultImageElement.src = resultImage;
-            document.body.appendChild(resultImageElement);
+            loadTemplate();
         });
+
+        if (urlHashArrayed['template']) {
+            loadTemplate();
+            loadPreview();
+        }
+
+        function loadPreview() {
+            var canvas = new fabric.Canvas('scorecardCanvas');
+            var canvasDom = document.getElementById('scorecardCanvas');
+            var template = templates[parseInt(document.getElementById('template').value)];
+
+            canvasDom.width = template.width;
+            canvasDom.height = template.height;
+            canvas.width = template.width;
+            canvas.height = template.height;
+            fabric.Image.fromURL(template.url, function (img) {
+                canvas.add(img);
+                for (var i = 0; i < template.fields.length; i++) {
+                    var value = template.fields[i].fixedValue || document.getElementById("field-"+i).value;
+                    if(template.fields[i].template && value){
+                        value = template.fields[i].template.replace("{{value}}", value);
+                    }
+                    var text = new fabric.Text(value, template.fields[i].options);
+                    canvas.add(text);
+
+                }
+
+                canvas.renderAll();
+                var resultImage = canvas.toDataURL();
+
+                document.getElementById("preview").innerHTML = "";
+                var resultImageElement = document.createElement('img');
+                resultImageElement.src = resultImage;
+                document.getElementById("preview").appendChild(resultImageElement);
+
+            }, { crossOrigin: 'Anonymous' });
+
+        }
+        function loadTemplate() {
+            var template = templates[parseInt(document.getElementById('template').value)];
+
+            document.getElementById("secondForm").style.display = "block";
+            var fields = document.getElementById("formFeilds");
+            for (var i = 0; i < template.fields.length; i++) {
+                if(template.fields[i].fixedValue){
+                    continue;
+                }
+                var label = document.createElement('label');
+                label.innerHTML = template.fields[i].name;
+                fields.appendChild(label);
+                var input = document.createElement('input');
+                input.type = "text";
+                input.id = "field-" + i;
+                input.name = i;
+                if (urlHashArrayed[i]) {
+                    input.value = decodeURIComponent(urlHashArrayed[i]);
+                }
+                input.addEventListener('blur', function () {
+                    window.history.pushState(null, null, '#template=' + document.getElementById('template').value + '&' + convertFormToKeyValuePairString('secondForm'));
+                });
+                input.addEventListener('input', function () {
+                    loadPreview();
+                });
+
+                fields.appendChild(input);
+                var linebreak = document.createElement('br');
+                fields.appendChild(linebreak);
+            }
+        }
+
     </script>
 </body>
 
