@@ -32,7 +32,7 @@
         // Load the template image onto the canvas
         fabric.Image.fromURL(templates[0].url, function (img) {
             canvas.add(img);
-        });
+        }, { crossOrigin: 'Anonymous' });
 
         // Handle form submission
         document.getElementById('scoreForm').addEventListener('submit', function (event) {
