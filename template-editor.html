@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cricket Scorecard Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
+</head>
+
+<body>
+    <h1>Cricket Scorecard Generator</h1>
+    <canvas id="scorecardCanvas" width="800" height="600"></canvas>
+    <form id="scoreForm">
+        <label for="template">Template:</label>
+        <select id="template">
+            <option value="0">Template 1</option>
+        </select>
+        <br>
+        <label for="team1Score">Team 1 Score:</label>
+        <input id="team1Score" name="team1Score">
+        <br>
+        <label for="team2Score">Team 2 Score:</label>
+        <input id="team2Score" name="team2Score">
+        <br>
+        <input type="submit" value="Generate Scorecard">
+    </form>
+
+    <script>
+        var templates = [{ url: 'https://dummyimage.com/640x360/fff/aaa', score1Pos: { left: 100, top: 100 },score2Pos: { left: 200, top: 150 } }]
+        // Create a Fabric.js canvas object
+        var canvas = new fabric.Canvas('scorecardCanvas');
+
+        // Load the template image onto the canvas
+        fabric.Image.fromURL(templates[0].url, function (img) {
+            canvas.add(img);
+        });
+
+        // Handle form submission
+        document.getElementById('scoreForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get the form inputs
+            var team1Score = (document.getElementById('team1Score').value);
+            var team2Score = (document.getElementById('team2Score').value);
+            var template = parseInt(document.getElementById('template').value);
+
+            // Get the text objects on the canvas
+            var text = new fabric.Text(team1Score, templates[template].score1Pos);
+            canvas.add(text);
+
+            var text2 = new fabric.Text(team2Score, templates[template].score2Pos);
+            canvas.add(text2);
+
+
+            // Render the canvas to generate the result image
+            canvas.renderAll();
+
+            // Convert the canvas to a data URL
+            var resultImage = canvas.toDataURL();
+
+            // Display the result image to the user
+            var resultImageElement = document.createElement('img');
+            resultImageElement.src = resultImage;
+            document.body.appendChild(resultImageElement);
+        });
+    </script>
+</body>
+
+</html>
