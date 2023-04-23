@@ -104,15 +104,15 @@ var templates =
             { name: 'Team 2 Batsman 1 Score', options: { top: 728, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
             { name: 'Team 2 Batsman 2', options: { top: 798, left: 490, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
             { name: 'Team 2 Batsman 2 Score', options: { top: 798, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Batsman 3', options: { top: 540, left: 490, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Batsman 3 Score', options: { top: 540, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
+            { name: 'Team 2 Batsman 3', options: { top: 868, left: 490, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
+            { name: 'Team 2 Batsman 3 Score', options: { top: 868, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
 
             { name: 'Team 2 Bowler 1', options: { top: 400, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
             { name: 'Team 2 Bowler 1 Score', options: { top: 400, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
             { name: 'Team 2 Bowler 2', options: { top: 470, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
             { name: 'Team 2 Bowler 2 Score', options: { top: 470, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Bowler 3', options: { top: 868, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Bowler 3 Score', options: { top: 868, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
+            { name: 'Team 2 Bowler 3', options: { top: 540, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
+            { name: 'Team 2 Bowler 3 Score', options: { top: 540, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
 
             { name: 'Man of The Match', template: 'MAN OF THE MATCH: {{value}}', options: { top: 952, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#2c045f', originX: 'center' } },
             { name: 'Bottom Line', options: { top: 1012, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#ffc200', originX: 'center' } },
@@ -163,12 +163,11 @@ var templates =
             { name: 'Team 2 Bowler 1 Score', options: { top: 400, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
             { name: 'Team 2 Bowler 2', options: { top: 470, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
             { name: 'Team 2 Bowler 2 Score', options: { top: 470, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Bowler 3', options: { top: 868, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Bowler 3 Score', options: { top: 868, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
+            { name: 'Team 2 Bowler 3', options: { top: 540, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
+            { name: 'Team 2 Bowler 3 Score', options: { top: 540, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
 
             { name: 'Man of The Match', template: 'MAN OF THE MATCH: {{value}}', options: { top: 952, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#2c045f', originX: 'center' } },
             { name: 'Bottom Line', options: { top: 1012, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#ffc200', originX: 'center' } },
-
 
 
         ]
