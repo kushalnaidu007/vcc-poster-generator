@@ -114,60 +114,11 @@ var templates =
             { name: 'Team 2 Bowler 3', options: { top: 540, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
             { name: 'Team 2 Bowler 3 Score', options: { top: 540, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
 
-            { name: 'Man of The Match', template: 'MAN OF THE MATCH: {{value}}', options: { top: 952, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#2c045f', originX: 'center' } },
-            { name: 'Bottom Line', options: { top: 1012, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#ffc200', originX: 'center' } },
-
-
-
-        ]
-    },
-
-    {
-        name: 'Match Summary - Sebi',
-        width: 1920,
-        height: 1080,
-        url: 'assets/matchsummarysebi.jpg',
-        fields: [
-            { name: 'Title', options: { top: 172, left: 1140, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#ffc200', originX: 'center', originY: 'center' } },
-            { name: 'Subtitle', options: { top: 218, left: 1140, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'normal', fill: '#d399ff', originX: 'center', originY: 'center' } },
-            { name: 'Team 1', options: { top: 312, left: 450, fontFamily: 'Roboto', fontSize: '45', fontWeight: '900', fill: '#1c013e' } },
-            { name: 'Team 2', options: { top: 640, left: 470, fontFamily: 'Roboto', fontSize: '45', fontWeight: '900', fill: '#1c013e' } },
-            { name: 'Team 1 Score', options: { top: 312, left: 1312, fontFamily: 'Roboto', fontSize: '45', fontWeight: '900', fill: '#1c013e' } },
-            { name: 'Team 1 Overs', template: '{{value}} overs', options: { top: 316, left: 1140, fontFamily: 'Roboto', fontSize: '38', fontWeight: '100', fill: '#1c013e' } },
-            { name: 'Team 2 Score', options: { top: 640, left: 1312, fontFamily: 'Roboto', fontSize: '45', fontWeight: '900', fill: '#1c013e' } },
-            { name: 'Team 2 Overs', template: '{{value}} overs', options: { top: 643, left: 1140, fontFamily: 'Roboto', fontSize: '38', fontWeight: '100', fill: '#1c013e' } },
-            { name: 'Team 1 Batsman 1', options: { top: 400, left: 490, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Batsman 1 Score', options: { top: 400, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Batsman 2', options: { top: 470, left: 490, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Batsman 2 Score', options: { top: 470, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Batsman 3', options: { top: 540, left: 490, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Batsman 3 Score', options: { top: 540, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-
-            { name: 'Team 1 Bowler 1', options: { top: 728, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Bowler 1 Score', options: { top: 728, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Bowler 2', options: { top: 798, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Bowler 2 Score', options: { top: 798, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Bowler 3', options: { top: 868, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 1 Bowler 3 Score', options: { top: 868, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-
-
-
-            { name: 'Team 2 Batsman 1', options: { top: 728, left: 490, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Batsman 1 Score', options: { top: 728, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Batsman 2', options: { top: 798, left: 490, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Batsman 2 Score', options: { top: 798, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Batsman 3', options: { top: 868, left: 490, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Batsman 3 Score', options: { top: 868, left: 840, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-
-            { name: 'Team 2 Bowler 1', options: { top: 400, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Bowler 1 Score', options: { top: 400, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Bowler 2', options: { top: 470, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Bowler 2 Score', options: { top: 470, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Bowler 3', options: { top: 540, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-            { name: 'Team 2 Bowler 3 Score', options: { top: 540, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
-
-            { name: 'Man of The Match', template: 'MAN OF THE MATCH: {{value}}', options: { top: 952, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#2c045f', originX: 'center' } },
-            { name: 'Bottom Line', options: { top: 1012, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#ffc200', originX: 'center' } },
+            { name: 'Man of The Match', template: 'MAN OF THE MATCH: {{value}}', options: { top: 952, left: 1000, fontFamily: 'Roboto', fontSize: '30', fontWeight: '900', fill: '#b00000', originX: 'center', shadow: new fabric.Shadow({
+                color: '#fff',
+                blur: 10
+            }) } },
+            { name: 'Bottom Line', options: { top: 1012, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#ffc200', originX: 'center' } }
 
 
         ]
