@@ -50,6 +50,7 @@ var templates =
             { name: 'Other Team', options: { top: 675, left: 512, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#f7cc54', originX: 'center', originY: 'center' } },
             { name: 'Date', options: { top: 725, left: 512, fontFamily: 'Roboto', fontSize: '25', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' } },
             { name: 'Day', options: { top: 765, left: 512, fontFamily: 'Roboto', fontSize: '25', fontWeight: 'bold', fill: '#a672ec', originX: 'center', originY: 'center' } },
+            { name: 'Location', options: { top: 795, left: 512, fontFamily: 'Roboto', fontSize: '22', fontWeight: 'normal', fill: '#ccc', originX: 'center', originY: 'center' } },
             { name: 'Player 1', options: { top: 875, left: 66, fontFamily: 'Roboto', fontSize: '50', fontWeight: 'bold', fill: '#f7cc54' } },
             { name: 'Player 2', options: { top: 950, left: 66, fontFamily: 'Roboto', fontSize: '50', fontWeight: 'bold', fill: '#f7cc54' } },
             { name: 'Player 3', options: { top: 1025, left: 66, fontFamily: 'Roboto', fontSize: '50', fontWeight: 'bold', fill: '#f7cc54' } },
