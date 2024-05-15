@@ -1,5 +1,44 @@
 var templates =
     [{
+        name: 'Playing XI - 2024 Red Team',
+        width: 1080,
+        height: 1920,
+        // url: 'assets/RedTeamSummary2024.jpeg',
+        url: 'https://aashwin.github.io/vcc-poster-generator/assets/RedTeamSelection2024.jpg',
+
+        fields: [
+
+            {
+                name: 'Team Name', options: { top: 230, left: 1010, fontFamily: 'Roboto', fontSize: '48', fontWeight: 'bold', fill: '#fff', originX: 'right', originY: 'center' }
+            },
+            {
+                name: 'Date', options: { top: 265, left: 1010, fontFamily: 'Roboto', fontSize: '24', fontWeight: 'normal', fill: '#fff', originX: 'right', originY: 'center' }
+            },
+            {
+                name: 'Other Team', template: 'vs {{value}}', options: { top: 550, left: 575, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' }
+            },
+            {
+                name: 'Location', template: 'at {{value}}', options: { top: 580, left: 575, fontFamily: 'Roboto', fontSize: '20', fontWeight: 'normal', fill: '#fff', originX: 'center', originY: 'center' }
+            },
+            // { name: 'vs', fixedValue: "VS", options: { top: 540, left: 575, fontFamily: 'Roboto', fontSize: '22', fontWeight: 'normal', fill: '#FFF', originX: 'center', originY: 'center' } },
+            // { name: 'Other Team', options: { top: 675, left: 512, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#f7cc54', originX: 'center', originY: 'center' } },
+            // { name: 'Date', options: { top: 725, left: 512, fontFamily: 'Roboto', fontSize: '25', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' } },
+            // { name: 'Day', options: { top: 765, left: 512, fontFamily: 'Roboto', fontSize: '25', fontWeight: 'bold', fill: '#a672ec', originX: 'center', originY: 'center' } },
+            // { name: 'Other Team', options: { top: 565, left: 575, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' } },
+            { name: 'Player 1', options: { top: 617, left: 320, fontFamily: 'Roboto', fontSize: '50', fontWeight: 'bold', fill: '#ffffff' } },
+            { name: 'Player 2', options: { top: 710, left: 320, fontFamily: 'Roboto', fontSize: '50', fontWeight: 'bold', fill: '#ffffff' } },
+            { name: "Player 3", options: { top: 803, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 4", options: { top: 896, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 5", options: { top: 989, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 6", options: { top: 1082, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 7", options: { top: 1175, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 8", options: { top: 1268, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 9", options: { top: 1361, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 10", options: { top: 1454, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 11", options: { top: 1547, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } }
+        ]
+    },
+    {
         name: 'Playing XI',
         width: 600,
         height: 400,
@@ -115,10 +154,14 @@ var templates =
             { name: 'Team 2 Bowler 3', options: { top: 540, left: 1020, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
             { name: 'Team 2 Bowler 3 Score', options: { top: 540, left: 1300, fontFamily: 'Roboto', fontSize: '40', fontWeight: '900', fill: '#fff' } },
 
-            { name: 'Man of The Match', template: 'MAN OF THE MATCH: {{value}}', options: { top: 952, left: 1000, fontFamily: 'Roboto', fontSize: '30', fontWeight: '900', fill: '#b00000', originX: 'center', shadow: new fabric.Shadow({
-                color: '#fff',
-                blur: 10
-            }) } },
+            {
+                name: 'Man of The Match', template: 'MAN OF THE MATCH: {{value}}', options: {
+                    top: 952, left: 1000, fontFamily: 'Roboto', fontSize: '30', fontWeight: '900', fill: '#b00000', originX: 'center', shadow: new fabric.Shadow({
+                        color: '#fff',
+                        blur: 10
+                    })
+                }
+            },
             { name: 'Bottom Line', options: { top: 1012, left: 1000, fontFamily: 'Roboto', fontSize: '32', fontWeight: '900', fill: '#ffc200', originX: 'center' } }
 
 

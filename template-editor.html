@@ -3,14 +3,22 @@
 
 <head>
     <title>Cricket Scorecard Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
     <style>
+        body {
+            font-family: 'Roboto';
+        }
+
         .canvas-container {
             display: none
         }
     </style>
     <script src="template.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 </head>
 
@@ -98,6 +106,7 @@
                         value = template.fields[i].template.replace("{{value}}", value);
                     }
                     var text = new fabric.Text(value, template.fields[i].options);
+                    console.log(template.fields[i].options);
                     canvas.add(text);
 
                 }
