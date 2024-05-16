@@ -39,11 +39,50 @@ var templates =
         ]
     },
     {
-        name: 'Playing XI - 2024 Blue Team',
+        name: 'Playing XI - 2024 Teal Team',
         width: 1080,
         height: 1920,
         // url: 'assets/RedTeamSummary2024.jpeg',
         url: 'https://aashwin.github.io/vcc-poster-generator/assets/BlueTeamSelection2024.jpg',
+
+        fields: [
+
+            {
+                name: 'Team Name', options: { top: 230, left: 1010, fontFamily: 'Roboto', fontSize: '48', fontWeight: 'bold', fill: '#c4fced', originX: 'right', originY: 'center' }
+            },
+            {
+                name: 'Date', options: { top: 265, left: 1010, fontFamily: 'Roboto', fontSize: '24', fontWeight: 'normal', fill: '#c4fced', originX: 'right', originY: 'center' }
+            },
+            {
+                name: 'Other Team', template: 'vs {{value}}', options: { top: 550, left: 575, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' }
+            },
+            {
+                name: 'Location', template: 'at {{value}}', options: { top: 580, left: 575, fontFamily: 'Roboto', fontSize: '20', fontWeight: 'normal', fill: '#c4fced', originX: 'center', originY: 'center' }
+            },
+            // { name: 'vs', fixedValue: "VS", options: { top: 540, left: 575, fontFamily: 'Roboto', fontSize: '22', fontWeight: 'normal', fill: '#FFF', originX: 'center', originY: 'center' } },
+            // { name: 'Other Team', options: { top: 675, left: 512, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#f7cc54', originX: 'center', originY: 'center' } },
+            // { name: 'Date', options: { top: 725, left: 512, fontFamily: 'Roboto', fontSize: '25', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' } },
+            // { name: 'Day', options: { top: 765, left: 512, fontFamily: 'Roboto', fontSize: '25', fontWeight: 'bold', fill: '#a672ec', originX: 'center', originY: 'center' } },
+            // { name: 'Other Team', options: { top: 565, left: 575, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' } },
+            { name: 'Player 1', options: { top: 617, left: 320, fontFamily: 'Roboto', fontSize: '50', fontWeight: 'bold', fill: '#ffffff' } },
+            { name: 'Player 2', options: { top: 710, left: 320, fontFamily: 'Roboto', fontSize: '50', fontWeight: 'bold', fill: '#ffffff' } },
+            { name: "Player 3", options: { top: 803, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 4", options: { top: 896, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 5", options: { top: 989, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 6", options: { top: 1082, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 7", options: { top: 1175, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 8", options: { top: 1268, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 9", options: { top: 1361, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 10", options: { top: 1454, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Player 11", options: { top: 1547, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } }
+        ]
+    },
+    {
+        name: 'Playing XI - 2024 Blue Team',
+        width: 1080,
+        height: 1920,
+        // url: 'assets/RedTeamSummary2024.jpeg',
+        url: 'https://aashwin.github.io/vcc-poster-generator/assets/OtherBlueTeamSummary2024.jpg',
 
         fields: [
 
