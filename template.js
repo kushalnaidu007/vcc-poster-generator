@@ -35,7 +35,8 @@ var templates =
             { name: "Player 8", options: { top: 1268, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
             { name: "Player 9", options: { top: 1361, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
             { name: "Player 10", options: { top: 1454, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
-            { name: "Player 11", options: { top: 1547, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } }
+            { name: "Player 11", options: { top: 1547, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Umpire", template: 'Umpire(s): {{value}}', options: { top: 1650, left: 320, fontFamily: "Roboto", fontSize: "25", fontWeight: "bold", fill: "#ffffff" } }
         ]
     },
     {
@@ -74,7 +75,9 @@ var templates =
             { name: "Player 8", options: { top: 1268, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
             { name: "Player 9", options: { top: 1361, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
             { name: "Player 10", options: { top: 1454, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
-            { name: "Player 11", options: { top: 1547, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } }
+            { name: "Player 11", options: { top: 1547, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Umpire", template: 'Umpire(s): {{value}}', options: { top: 1650, left: 320, fontFamily: "Roboto", fontSize: "25", fontWeight: "bold", fill: "#ffffff" } }
+
         ]
     },
     {
@@ -113,7 +116,8 @@ var templates =
             { name: "Player 8", options: { top: 1268, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
             { name: "Player 9", options: { top: 1361, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
             { name: "Player 10", options: { top: 1454, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
-            { name: "Player 11", options: { top: 1547, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } }
+            { name: "Player 11", options: { top: 1547, left: 320, fontFamily: "Roboto", fontSize: "50", fontWeight: "bold", fill: "#ffffff" } },
+            { name: "Umpire", template: 'Umpire(s): {{value}}', options: { top: 1650, left: 320, fontFamily: "Roboto", fontSize: "25", fontWeight: "bold", fill: "#ffffff" } }
         ]
     },
     {
