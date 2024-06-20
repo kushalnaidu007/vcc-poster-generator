@@ -209,18 +209,22 @@ var templates =
             { name: 'Team 1 Batsman 2 Score', options: { top: 558, left: 650, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
 
             { name: 'Team 1 Bowler 1', options: { top: 788, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 1 Bowler 1 Score', options: { top: 788, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 1 Score', options: { top: 788, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 1 Overs', template: '{{value}} overs', options: { top: 825, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#c3dff8', originX: 'right' } },
             { name: 'Team 1 Bowler 2', options: { top: 896, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 1 Bowler 2 Score', options: { top: 896, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 2 Score', options: { top: 896, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 2 Overs', template: '{{value}} overs', options: { top: 933, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#c3dff8', originX: 'right' } },
 
             { name: 'Team 2 Batsman 1', options: { top: 787, left: 96, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
             { name: 'Team 2 Batsman 1 Score', options: { top: 788, left: 650, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
             { name: 'Team 2 Batsman 2', options: { top: 896, left: 96, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
             { name: 'Team 2 Batsman 2 Score', options: { top: 896, left: 650, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
             { name: 'Team 2 Bowler 1', options: { top: 450, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 2 Bowler 1 Score', options: { top: 450, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 1 Score', options: { top: 450, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 2 Overs', template: '{{value}} overs', options: { top: 487, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#c3dff8', originX: 'right' } },
             { name: 'Team 2 Bowler 2', options: { top: 558, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 2 Bowler 2 Score', options: { top: 558, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 2 Score', options: { top: 558, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 2 Overs', template: '{{value}} overs', options: { top: 595, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#c3dff8', originX: 'right' } },
 
             {
                 name: 'Man of The Match', template: 'Man of the Match: {{value}}', options: {
@@ -263,18 +267,22 @@ var templates =
             { name: 'Team 1 Batsman 2 Score', options: { top: 558, left: 650, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
 
             { name: 'Team 1 Bowler 1', options: { top: 788, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 1 Bowler 1 Score', options: { top: 788, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 1 Score', options: { top: 788, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 1 Overs', template: '{{value}} overs', options: { top: 825, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#c3dff8', originX: 'right' } },
             { name: 'Team 1 Bowler 2', options: { top: 896, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 1 Bowler 2 Score', options: { top: 896, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 2 Score', options: { top: 896, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 2 Overs', template: '{{value}} overs', options: { top: 933, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#c3dff8', originX: 'right' } },
 
             { name: 'Team 2 Batsman 1', options: { top: 787, left: 96, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
             { name: 'Team 2 Batsman 1 Score', options: { top: 788, left: 650, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
             { name: 'Team 2 Batsman 2', options: { top: 896, left: 96, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
             { name: 'Team 2 Batsman 2 Score', options: { top: 896, left: 650, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
             { name: 'Team 2 Bowler 1', options: { top: 450, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 2 Bowler 1 Score', options: { top: 450, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 1 Score', options: { top: 450, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 2 Overs', template: '{{value}} overs', options: { top: 487, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#c3dff8', originX: 'right' } },
             { name: 'Team 2 Bowler 2', options: { top: 558, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 2 Bowler 2 Score', options: { top: 558, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 2 Score', options: { top: 558, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 2 Overs', template: '{{value}} overs', options: { top: 595, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#c3dff8', originX: 'right' } },
 
             {
                 name: 'Man of The Match', template: 'Man of the Match: {{value}}', options: {
@@ -318,18 +326,22 @@ var templates =
             { name: 'Team 1 Batsman 2 Score', options: { top: 558, left: 650, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
 
             { name: 'Team 1 Bowler 1', options: { top: 788, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 1 Bowler 1 Score', options: { top: 788, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 1 Score', options: { top: 788, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 1 Overs', template: '{{value}} overs', options: { top: 825, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#ffd6d6', originX: 'right' } },
             { name: 'Team 1 Bowler 2', options: { top: 896, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 1 Bowler 2 Score', options: { top: 896, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 2 Score', options: { top: 896, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 1 Bowler 2 Overs', template: '{{value}} overs', options: { top: 933, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#ffd6d6', originX: 'right' } },
 
             { name: 'Team 2 Batsman 1', options: { top: 787, left: 96, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
             { name: 'Team 2 Batsman 1 Score', options: { top: 788, left: 650, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
             { name: 'Team 2 Batsman 2', options: { top: 896, left: 96, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
             { name: 'Team 2 Batsman 2 Score', options: { top: 896, left: 650, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
             { name: 'Team 2 Bowler 1', options: { top: 450, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 2 Bowler 1 Score', options: { top: 450, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 1 Score', options: { top: 450, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 2 Overs', template: '{{value}} overs', options: { top: 487, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#ffd6d6', originX: 'right' } },
             { name: 'Team 2 Bowler 2', options: { top: 558, left: 740, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff' } },
-            { name: 'Team 2 Bowler 2 Score', options: { top: 558, left: 1270, fontFamily: 'Roboto', fontSize: '40', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 2 Score', options: { top: 558, left: 1270, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'right' } },
+            { name: 'Team 2 Bowler 2 Overs', template: '{{value}} overs', options: { top: 595, left: 1267, fontFamily: 'Roboto', fontSize: '12', fontWeight: 'normal', fill: '#ffd6d6', originX: 'right' } },
 
             {
                 name: 'Man of The Match', template: 'Man of the Match: {{value}}', options: {
