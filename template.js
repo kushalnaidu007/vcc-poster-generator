@@ -423,4 +423,43 @@ var templates =
 
 
         ]
-    }];
+    },
+    {
+        name: 'Castle View: Playing XI',
+        width: 3240,
+        height: 3240,
+        url: 'https://aashwin.github.io/vcc-poster-generator/assets/castleview-playingxi.jpeg',
+
+        fields: [
+            { name: 'playingXi', fixedValue: "Playing XI", options: { top: 860, left: 900, fontFamily: 'Roboto', fontSize: '80', fontWeight: 'normal', fill: '#ffb2b2', originX: 'center', originY: 'center' } },
+
+            {
+                name: 'Team Name', options: { top: 690, left: 900, fontFamily: 'Roboto', fontSize: '120', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' }
+            },
+            {
+                name: 'Date', options: { top: 620, left: 1310, fontFamily: 'Roboto', fontSize: '24', fontWeight: 'normal', fill: '#ffb2b2', originX: 'right', originY: 'center' }
+            },
+            {
+                name: 'Other Team', template: 'vs {{value}}', options: { top: 780, left: 900, fontFamily: 'Roboto', fontSize: '50', fontWeight: 'bold', fill: '#ffce1c', originX: 'center', originY: 'center' }
+            },
+            {
+                name: 'Location', template: 'Location: {{value}}', options: { top: 620, left: 498, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'normal', fill: '#ffb2b2', originX: 'left', originY: 'center' }
+            },
+            // { name: 'vs', fixedValue: "VS", options: { top: 540, left: 575, fontFamily: 'Roboto', fontSize: '22', fontWeight: 'normal', fill: '#FFF', originX: 'center', originY: 'center' } },
+            // { name: 'Other Team', options: { top: 675, left: 512, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#f7cc54', originX: 'center', originY: 'center' } },
+            // { name: 'Date', options: { top: 725, left: 512, fontFamily: 'Roboto', fontSize: '25', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' } },
+            // { name: 'Day', options: { top: 765, left: 512, fontFamily: 'Roboto', fontSize: '25', fontWeight: 'bold', fill: '#a672ec', originX: 'center', originY: 'center' } },
+            // { name: 'Other Team', options: { top: 565, left: 575, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#fff', originX: 'center', originY: 'center' } },
+            { name: 'Player 1', options: { top: 1200, left: 900, fontFamily: 'Roboto', fontSize: '80', fontWeight: 'bold', fill: '#ffffff', originX: 'center', originY: 'center' } },
+            { name: 'Player 2', options: { top: 1350, left: 900, fontFamily: 'Roboto', fontSize: '80', fontWeight: 'bold', fill: '#ffffff', originX: 'center', originY: 'center' } },
+            { name: "Player 3", options: { top: 1500, left: 900, fontFamily: "Roboto", fontSize: "80", fontWeight: "bold", fill: "#ffffff", originX: 'center', originY: 'center' } },
+            { name: "Player 4", options: { top: 1650, left: 900, fontFamily: "Roboto", fontSize: "80", fontWeight: "bold", fill: "#ffffff", originX: 'center', originY: 'center' } },
+            { name: "Player 5", options: { top: 1800, left: 900, fontFamily: "Roboto", fontSize: "80", fontWeight: "bold", fill: "#ffffff", originX: 'center', originY: 'center' } },
+            { name: "Player 6", options: { top: 1950, left: 900, fontFamily: "Roboto", fontSize: "80", fontWeight: "bold", fill: "#ffffff", originX: 'center', originY: 'center' } },
+            { name: "Player 7", options: { top: 2100, left: 900, fontFamily: "Roboto", fontSize: "80", fontWeight: "bold", fill: "#ffffff", originX: 'center', originY: 'center' } },
+            { name: "Player 8", options: { top: 2250, left: 900, fontFamily: "Roboto", fontSize: "80", fontWeight: "bold", fill: "#ffffff", originX: 'center', originY: 'center' } },
+            { name: "Player 9", options: { top: 2400, left: 900, fontFamily: "Roboto", fontSize: "80", fontWeight: "bold", fill: "#ffffff", originX: 'center', originY: 'center' } },
+            { name: "Player 10", options: { top: 2550, left: 900, fontFamily: "Roboto", fontSize: "80", fontWeight: "bold", fill: "#ffffff", originX: 'center', originY: 'center' } },
+            { name: "Player 11", options: { top: 2700, left: 900, fontFamily: "Roboto", fontSize: "80", fontWeight: "bold", fill: "#ffffff", originX: 'center', originY: 'center' } },
+        ]
+    },];
