@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cricket Scorecard Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto';
+        }
+
+        .canvas-container {
+            display: none
+        }
+    </style>
+    <script src="template.js"></script>
+
+</head>
+
+<body>
+    <h1>Cricket Scorecard Generator</h1>
+    <form id="firstForm">
+        <label for="template">Template:</label>
+        <select id="template">
+        </select>
+        <br>
+        <input type="submit" value="Pick Template">
+    </form>
+    <form id="secondForm" style="display:none">
+        <div id="formFeilds"></div>
+    </form>
+    <canvas style="display:none" id="scorecardCanvas"></canvas>
+    <div id="preview"></div>
+
+    <script>
+        var urlHash = window.location.hash.replace("#", "").split("&");
+        var urlHashArrayed = {};
+        for (var i = 0; i < urlHash.length; i++) {
+            var split = urlHash[i].split("=");
+            urlHashArrayed[split[0]] = split[1];
+        }
+        function convertFormToKeyValuePairString(formId) {
+            var form = document.getElementById(formId);
+
+            var formData = {};
+
+            for (var i = 0; i < form.elements.length; i++) {
+                var element = form.elements[i];
+                formData[element.name] = element.value;
+            }
+
+            var keyValuePairs = [];
+            for (var key in formData) {
+                if (key && formData[key]) {
+                    keyValuePairs.push(key + '=' + encodeURIComponent(formData[key]));
+                }
+            }
+
+            // Return the key-value pair string
+            return keyValuePairs.join('&');
+        }
+
+        for (i = 0; i < templates.length; i++) {
+            var option = document.createElement('option');
+            option.value = i;
+            option.text = templates[i].name;
+            console.log(urlHashArrayed);
+            if (templates[i].name.indexOf('Castle View') < 0) {
+                continue;
+            }
+            if (urlHashArrayed['template'] == i) {
+                option.selected = true;
+            }
+            document.getElementById("template").add(option);
+        }
+
+        // // Handle form submission
+        document.getElementById('firstForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            window.history.pushState(null, null, '#template=' + document.getElementById('template').value);
+
+            loadTemplate();
+        });
+
+        if (urlHashArrayed['template']) {
+            loadTemplate();
+            loadPreview();
+        }
+
+        function loadPreview() {
+            var canvas = new fabric.Canvas('scorecardCanvas');
+            var canvasDom = document.getElementById('scorecardCanvas');
+            var template = templates[parseInt(document.getElementById('template').value)];
+
+            canvasDom.width = template.width;
+            canvasDom.height = template.height;
+            canvas.width = template.width;
+            canvas.height = template.height;
+            fabric.Image.fromURL(template.url, function (img) {
+                canvas.add(img);
+                for (var i = 0; i < template.fields.length; i++) {
+                    var value = template.fields[i].fixedValue || document.getElementById("field-" + i).value;
+                    if (template.fields[i].template && value) {
+                        value = template.fields[i].template.replace("{{value}}", value);
+                    }
+                    var text = new fabric.Text(value, template.fields[i].options);
+                    console.log(template.fields[i].options);
+                    canvas.add(text);
+
+                }
+
+                canvas.renderAll();
+                var resultImage = canvas.toDataURL();
+
+                document.getElementById("preview").innerHTML = "";
+                var resultImageElement = document.createElement('img');
+                resultImageElement.src = resultImage;
+                document.getElementById("preview").appendChild(resultImageElement);
+
+            }, { crossOrigin: 'Anonymous' });
+
+        }
+        function loadTemplate() {
+            var template = templates[parseInt(document.getElementById('template').value)];
+
+            document.getElementById("secondForm").style.display = "block";
+            var fields = document.getElementById("formFeilds");
+            fields.innerHTML = "";
+            for (var i = 0; i < template.fields.length; i++) {
+                if (template.fields[i].fixedValue) {
+                    continue;
+                }
+                var label = document.createElement('label');
+                label.innerHTML = template.fields[i].name;
+                fields.appendChild(label);
+                var input = document.createElement('input');
+                input.type = "text";
+                input.id = "field-" + i;
+                input.name = i;
+                if (urlHashArrayed[i]) {
+                    input.value = decodeURIComponent(urlHashArrayed[i]);
+                }
+                input.addEventListener('blur', function () {
+                    window.history.pushState(null, null, '#template=' + document.getElementById('template').value + '&' + convertFormToKeyValuePairString('secondForm'));
+                });
+                input.addEventListener('input', function () {
+                    loadPreview();
+                });
+
+                fields.appendChild(input);
+                var linebreak = document.createElement('br');
+                fields.appendChild(linebreak);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
