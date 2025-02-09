@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Match Summary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        form {
+            margin-top: 20px;
+        }
+    </style>
+     <script src="template.js"></script>
+</head>
+<body>
+
+<h1>VCC Match Summary Generator</h1>
+<button id="fetch-data">Fetch  Data</button>
+<div id="result"></div>
+
+<h2>Match Summary</h2>
+<form id="match-form">
+    <label for="team1">Team 1:</label>
+    <input type="text" id="team1" name="team1" ><br><br>
+    <label for="team2">Team 2:</label>
+    <input type="text" id="team2" name="team2" ><br><br>
+    <label for="team1score">Team1 Score:</label>
+    <input type="text" id="team1score" name="team1 score" ><br><br>
+    <label for="team1overs">Team1 Overs:</label>
+    <input type="text" id="team1overs" name="team1 overs" ><br><br>
+    <label for="team2score">Team2 Score:</label>
+    <input type="text" id="team2score" name="team2 score" ><br><br>
+    <label for="team2overs">Team2 Overs:</label>
+    <input type="text" id="team2overs" name="team2 overs" ><br><br>
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" ><br><br>
+    <label for="subtitle">Subtitle:</label>
+    <input type="text" id="subtitle" name="subtitle" ><br><br>
+    <label for="team1bm1">Team1 BM1:</label>
+    <input type="text" id="team1bm1" name="team1 bm1" ><br><br>
+    <label for="team1bm1score">Team1 BM1 Score:</label>
+    <input type="text" id="team1bm1score" name="team1 bm1 score" ><br><br>
+    <label for="team1bm2">Team1 BM2:</label>
+    <input type="text" id="team1bm2" name="team1 bm2" ><br><br>
+    <label for="team1bm2score">Team1 BM2 Score:</label>
+    <input type="text" id="team1bm2score" name="team1 bm2 score" ><br><br>
+    <label for="team1bl1">Team1 BL1:</label>
+    <input type="text" id="team1bl1" name="team1 bl1" ><br><br>
+    <label for="team1bl1score">Team1 BL1 Score:</label>
+    <input type="text" id="team1bl1score" name="team1 bl1 score" ><br><br>
+    <label for="team1bl2">Team1 BL2:</label>
+    <input type="text" id="team1bl2" name="team1 bl2" ><br><br>
+    <label for="team1bl2score">Team1 BL2 Score:</label>
+    <input type="text" id="team1bl2score" name="team1 bl2 score" ><br><br>
+    <label for="team2bm1">Team2 BM1:</label>
+    <input type="text" id="team2bm1" name="team2 bm1" ><br><br>
+    <label for="team2bm1score">Team1 BM1 Score:</label>
+    <input type="text" id="team2bm1score" name="team2 bm1 score" ><br><br>
+    <label for="team2bm2">Team2 BM2:</label>
+    <input type="text" id="team2bm2" name="team2 bm2" ><br><br>
+    <label for="team2bm2score">Team2 BM2 Score:</label>
+    <input type="text" id="team2bm2score" name="team2 bm2 score" ><br><br>
+    <label for="team2bl1">Team2 BL1:</label>
+    <input type="text" id="team2bl1" name="team2 bl1" ><br><br>
+    <label for="team2bl1score">Team2 BL1 Score:</label>
+    <input type="text" id="team2bl1score" name="team2 bl1 score" ><br><br>
+    <label for="team2bl2">Team2 BL2:</label>
+    <input type="text" id="team2bl2" name="team2 bl2" ><br><br>
+    <label for="team2bl2score">Team2 BL2 Score:</label>
+    <input type="text" id="team2bl2score" name="team2 bl2 score" ><br><br>
+    <label for="mom">Man of the Match:</label>
+    <input type="text" id="mom" name="man of the match" ><br><br>
+</form>
+<h3>Load Data To The Image</h3>
+<button id="load-data">Load Data</button>
+
+<div id="result"></div>
+<canvas style="display:none" id="scorecardCanvas"></canvas>
+    <div id="preview"></div>
+<script>
+    document.getElementById('fetch-data').addEventListener('click', () => {
+        fetch('https://d8b3dbab-7f23-45cc-9288-4d4b19948f3c.mock.pstmn.io/get-matches') // Replace with your actual API endpoint
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Assuming the API returns an array of matches
+                const match = data.matches[0]; // Get the first match
+                
+                // Populate input fields in the form
+                document.getElementById('team1').value = match.team1;
+                document.getElementById('team2').value = match.team2;
+                document.getElementById('team1score').value = match.team1score;
+                document.getElementById('team1overs').value = match.team1overs;
+                document.getElementById('team2score').value = match.team2score;
+                document.getElementById('team2overs').value = match.team2overs;
+                document.getElementById('title').value = match.title;
+                document.getElementById('subtitle').value = match.subtitle;
+                document.getElementById('team1bm1').value = match.tm1bm1;
+                document.getElementById('team1bm1score').value = match.tm1bm1score;
+                document.getElementById('team1bm2').value = match.tm1bm2;
+                document.getElementById('team1bm2score').value = match.tm1bm2score;
+                document.getElementById('team1bl1').value = match.tm1bl1;
+                document.getElementById('team1bl1score').value = match.tm1bl1score;
+                document.getElementById('team1bl2').value = match.tm1bl2;
+                document.getElementById('team1bl2score').value = match.tm1bl2score;
+                document.getElementById('team2bm1').value = match.tm2bm1;
+                document.getElementById('team2bm1score').value = match.tm2bm1score;
+                document.getElementById('team2bm2').value = match.tm2bm2;
+                document.getElementById('team2bm2score').value = match.tm2bm2score;
+                document.getElementById('team2bl1').value = match.tm2bl1;
+                document.getElementById('team2bl1score').value = match.tm2bl1score;
+                document.getElementById('team2bl2').value = match.tm2bl2;
+                document.getElementById('team2bl2score').value = match.tm2bl2score;
+                document.getElementById('mom').value = match.mom;
+
+            })
+            .catch(error => {
+                document.getElementById('result').innerHTML = 'Error: ' + error.message;
+            });
+            
+    });
+
+    document.getElementById('load-data').addEventListener('click', () => {
+            var canvas = new fabric.Canvas('scorecardCanvas');
+            var canvasDom = document.getElementById('scorecardCanvas');
+            var template = 'Match Summary - Red'
+            canvasDom.width = 1920;
+            canvasDom.height = 1080;
+            canvas.width = 1920;
+            canvas.height = 1080;
+            // Load an image from a URL
+            fabric.Image.fromURL('https://aashwin.github.io/vcc-poster-generator/assets/MatchSummary2024Red.jpg', function(img) {
+            
+            
+
+            // Add the image to the canvas
+            canvas.add(img);
+            
+            
+            var team1 = new fabric.Text(document.getElementById('team1').value, {
+            top: 336, left: 96, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#431313'
+        });
+            canvas.add(team1);
+            var team2 = new fabric.Text(document.getElementById('team2').value, {
+                top: 672, left: 96, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#431313' 
+        });
+            canvas.add(team2);
+
+            var team1score = new fabric.Text(document.getElementById('team1score').value, {
+                top: 336, left: 1272, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#ffd200', originX: 'right' 
+        });
+            canvas.add(team1score);
+
+            var team1overs = new fabric.Text(document.getElementById('team1overs').value, {
+                top: 339, left: 945, fontFamily: 'Roboto', fontSize: '38', fontWeight: 'normal', fill: '#ffd200' 
+        });
+            canvas.add(team1overs);
+
+            var team2score = new fabric.Text(document.getElementById('team2score').value, {
+                top: 674, left: 1272, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#ffd200', originX: 'right' 
+        });
+            canvas.add(team2score);
+
+            var team2overs = new fabric.Text(document.getElementById('team2overs').value, {
+                top: 676, left: 945, fontFamily: 'Roboto', fontSize: '38', fontWeight: 'normal', fill: '#ffd200' 
+        });
+            canvas.add(team2overs);
+            
+
+            canvas.renderAll();
+            var resultImage = canvas.toDataURL();
+
+                document.getElementById("preview").innerHTML = "";
+                var resultImageElement = document.createElement('img');
+                resultImageElement.src = resultImage;
+                document.getElementById("preview").appendChild(resultImageElement);
+           
+          /* canvas.renderAll();
+                var resultImage = canvas.toDataURL();
+
+                document.getElementById("preview").innerHTML = "";
+                var resultImageElement = document.createElement('img');
+                resultImageElement.src = resultImage;
+                document.getElementById("preview").appendChild(resultImageElement); */
+
+
+            }, { crossOrigin: 'Anonymous' });
+        });
+        
+</script>
+
+</body>
+</html>
