@@ -55,40 +55,9 @@
     <input type="text" id="title" name="title" ><br><br>
     <label for="subtitle">Subtitle:</label>
     <input type="text" id="subtitle" name="subtitle" ><br><br>
-    <label for="team1bm1">Team1 BM1:</label>
-    <input type="text" id="team1bm1" name="team1 bm1" ><br><br>
-    <label for="team1bm1score">Team1 BM1 Score:</label>
-    <input type="text" id="team1bm1score" name="team1 bm1 score" ><br><br>
-    <label for="team1bm2">Team1 BM2:</label>
-    <input type="text" id="team1bm2" name="team1 bm2" ><br><br>
-    <label for="team1bm2score">Team1 BM2 Score:</label>
-    <input type="text" id="team1bm2score" name="team1 bm2 score" ><br><br>
-    <label for="team1bl1">Team1 BL1:</label>
-    <input type="text" id="team1bl1" name="team1 bl1" ><br><br>
-    <label for="team1bl1score">Team1 BL1 Score:</label>
-    <input type="text" id="team1bl1score" name="team1 bl1 score" ><br><br>
-    <label for="team1bl2">Team1 BL2:</label>
-    <input type="text" id="team1bl2" name="team1 bl2" ><br><br>
-    <label for="team1bl2score">Team1 BL2 Score:</label>
-    <input type="text" id="team1bl2score" name="team1 bl2 score" ><br><br>
-    <label for="team2bm1">Team2 BM1:</label>
-    <input type="text" id="team2bm1" name="team2 bm1" ><br><br>
-    <label for="team2bm1score">Team1 BM1 Score:</label>
-    <input type="text" id="team2bm1score" name="team2 bm1 score" ><br><br>
-    <label for="team2bm2">Team2 BM2:</label>
-    <input type="text" id="team2bm2" name="team2 bm2" ><br><br>
-    <label for="team2bm2score">Team2 BM2 Score:</label>
-    <input type="text" id="team2bm2score" name="team2 bm2 score" ><br><br>
-    <label for="team2bl1">Team2 BL1:</label>
-    <input type="text" id="team2bl1" name="team2 bl1" ><br><br>
-    <label for="team2bl1score">Team2 BL1 Score:</label>
-    <input type="text" id="team2bl1score" name="team2 bl1 score" ><br><br>
-    <label for="team2bl2">Team2 BL2:</label>
-    <input type="text" id="team2bl2" name="team2 bl2" ><br><br>
-    <label for="team2bl2score">Team2 BL2 Score:</label>
-    <input type="text" id="team2bl2score" name="team2 bl2 score" ><br><br>
     <label for="mom">Man of the Match:</label>
     <input type="text" id="mom" name="man of the match" ><br><br>
+    <div id="players"> </div>
 </form>
 <h3>Load Data To The Image</h3>
 <button id="load-data">Load Data</button>
@@ -97,119 +66,99 @@
 <canvas style="display:none" id="scorecardCanvas"></canvas>
     <div id="preview"></div>
 <script>
-    document.getElementById('fetch-data').addEventListener('click', () => {
-        fetch('https://d8b3dbab-7f23-45cc-9288-4d4b19948f3c.mock.pstmn.io/get-matches') // Replace with your actual API endpoint
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Assuming the API returns an array of matches
-                const match = data.matches[0]; // Get the first match
-                
-                // Populate input fields in the form
-                document.getElementById('team1').value = match.team1;
-                document.getElementById('team2').value = match.team2;
-                document.getElementById('team1score').value = match.team1score;
-                document.getElementById('team1overs').value = match.team1overs;
-                document.getElementById('team2score').value = match.team2score;
-                document.getElementById('team2overs').value = match.team2overs;
-                document.getElementById('title').value = match.title;
-                document.getElementById('subtitle').value = match.subtitle;
-                document.getElementById('team1bm1').value = match.tm1bm1;
-                document.getElementById('team1bm1score').value = match.tm1bm1score;
-                document.getElementById('team1bm2').value = match.tm1bm2;
-                document.getElementById('team1bm2score').value = match.tm1bm2score;
-                document.getElementById('team1bl1').value = match.tm1bl1;
-                document.getElementById('team1bl1score').value = match.tm1bl1score;
-                document.getElementById('team1bl2').value = match.tm1bl2;
-                document.getElementById('team1bl2score').value = match.tm1bl2score;
-                document.getElementById('team2bm1').value = match.tm2bm1;
-                document.getElementById('team2bm1score').value = match.tm2bm1score;
-                document.getElementById('team2bm2').value = match.tm2bm2;
-                document.getElementById('team2bm2score').value = match.tm2bm2score;
-                document.getElementById('team2bl1').value = match.tm2bl1;
-                document.getElementById('team2bl1score').value = match.tm2bl1score;
-                document.getElementById('team2bl2').value = match.tm2bl2;
-                document.getElementById('team2bl2score').value = match.tm2bl2score;
-                document.getElementById('mom').value = match.mom;
+    const playerLabels = [
+        { prefix: 'team1', label: 'BM1' },
+        { prefix: 'team1', label: 'BM2' },
+        { prefix: 'team1', label: 'BL1' },
+        { prefix: 'team1', label: 'BL2' },
+        { prefix: 'team2', label: 'BM1' },
+        { prefix: 'team2', label: 'BM2' },
+        { prefix: 'team2', label: 'BL1' },
+        { prefix: 'team2', label: 'BL2' },
+    ];
 
+    const playersDiv = document.getElementById('players');
+    playerLabels.forEach(({ prefix, label }) => {
+        playersDiv.innerHTML += `
+            <div>
+                <label for="${prefix}${label.toLowerCase()}">${prefix} ${label}:</label>
+                <input type="text" id="${prefix}${label.toLowerCase()}" name="${prefix} ${label}">
+            </div>
+            <div>
+                <label for="${prefix}${label.toLowerCase()}score">${prefix} ${label} Score:</label>
+                <input type="text" id="${prefix}${label.toLowerCase()}score" name="${prefix} ${label} score">
+            </div>
+        `;
+    });
+    document.getElementById('fetch-data').addEventListener('click', () => {
+        fetch('https://d8b3dbab-7f23-45cc-9288-4d4b19948f3c.mock.pstmn.io/get-matches')
+            .then(response => response.json())
+            .then(data => {
+                const match = data.matches[0];
+                Object.keys(match).forEach(key => {
+                    const input = document.getElementById(key);
+                    if (input) {
+                        input.value = match[key];
+                    }
+                });
             })
             .catch(error => {
                 document.getElementById('result').innerHTML = 'Error: ' + error.message;
             });
-            
-    });
+        });
 
-    document.getElementById('load-data').addEventListener('click', () => {
-            var canvas = new fabric.Canvas('scorecardCanvas');
-            var canvasDom = document.getElementById('scorecardCanvas');
-            var template = 'Match Summary - Red'
-            canvasDom.width = 1920;
-            canvasDom.height = 1080;
-            canvas.width = 1920;
-            canvas.height = 1080;
-            // Load an image from a URL
-            fabric.Image.fromURL('https://aashwin.github.io/vcc-poster-generator/assets/MatchSummary2024Red.jpg', function(img) {
-            
-            
-
-            // Add the image to the canvas
+        document.getElementById('load-data').addEventListener('click', () => {
+        var canvas = new fabric.Canvas('scorecardCanvas');
+        var canvasDom = document.getElementById('scorecardCanvas');
+        var template = 'Match Summary - Red'
+        canvasDom.width = 1920;
+        canvasDom.height = 1080;
+        canvas.width = 1920;
+        canvas.height = 1080;
+        // Load an image from a URL
+        fabric.Image.fromURL('https://aashwin.github.io/vcc-poster-generator/assets/MatchSummary2024Red.jpg', function(img) {
+        
             canvas.add(img);
-            
-            
-            var team1 = new fabric.Text(document.getElementById('team1').value, {
-            top: 336, left: 96, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#431313'
-        });
-            canvas.add(team1);
-            var team2 = new fabric.Text(document.getElementById('team2').value, {
-                top: 672, left: 96, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#431313' 
-        });
-            canvas.add(team2);
+            const textElements = [
+                { value: 'team1', top: 336, left: 96, fontSize: 45, fill: '#431313', fontWeight: 'bold', originX: 'left' },
+                { value: 'team2', top: 672, left: 96, fontSize: 45, fill: '#431313', fontWeight: 'bold', originX: 'left' },
+                { value: 'team1score', top: 336, left: 1272, fontSize: 45, fill: '#ffd200', fontWeight: 'bold', originX: 'right' },
+                { value: 'team1overs', top: 339, left: 945, fontSize: 38, fill: '#ffd200', originX: 'left' },
+                { value: 'team2score', top: 674, left: 1272, fontSize: 45, fill: '#ffd200', fontWeight: 'bold', originX: 'right' },
+                { value: 'team2overs', top: 676, left: 945, fontSize: 38, fill: '#ffd200', originX: 'left'},
+                { value: 'team1bm1', top: 450, left: 96, fontSize: 38, fill: '#ffd200', originX: 'left'},
+                { value: 'team1bm1score', top: 450, left: 650, fontSize: 38, fill: '#ffd200', originX: 'right'},
+                { value: 'team1bm2', top: 558, left: 96, fontSize: 38, fill: '#ffd200', originX: 'left'},
+                { value: 'team1bm2score', top: 558, left: 650, fontSize: 38, fill: '#ffd200', originX: 'right'},
+                { value: 'team1bl1', top: 788, left: 740, fontSize: 38, fill: '#ffd200', originX: 'left'},
+                { value: 'team1bl1score', top: 788, left: 1270, fontSize: 38, fill: '#ffd200', originX: 'right'},
+                { value: 'team1bl2', top: 896, left: 740, fontSize: 38, fill: '#ffd200', originX: 'left'},
+                { value: 'team1bl2score', top: 896, left: 1270, fontSize: 38, fill: '#ffd200', originX: 'right'},
+                { value: 'team2bm1', top: 787, left: 96, fontSize: 38, fill: '#ffd200', originX: 'left'},
+                { value: 'team2bm1score', top: 788, left: 650, fontSize: 38, fill: '#ffd200', originX: 'right'},
+                { value: 'team2bm2', top: 896, left: 96, fontSize: 38, fill: '#ffd200', originX: 'left'},
+                { value: 'team2bm2score', top: 896, left: 650, fontSize: 38, fill: '#ffd200', originX: 'right'},
+                { value: 'team2bl1', top: 450, left: 740, fontSize: 38, fill: '#ffd200', originX: 'left'},
+                { value: 'team2bl1score', top: 450, left: 1270, fontSize: 38, fill: '#ffd200', originX: 'right'},
+                { value: 'team2bl2', top: 558, left: 740, fontSize: 38, fill: '#ffd200', originX: 'left'},
+                { value: 'team2bl2score', top: 558, left: 1270, fontSize: 38, fill: '#ffd200', originX: 'right'},
+            ];
 
-            var team1score = new fabric.Text(document.getElementById('team1score').value, {
-                top: 336, left: 1272, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#ffd200', originX: 'right' 
-        });
-            canvas.add(team1score);
-
-            var team1overs = new fabric.Text(document.getElementById('team1overs').value, {
-                top: 339, left: 945, fontFamily: 'Roboto', fontSize: '38', fontWeight: 'normal', fill: '#ffd200' 
-        });
-            canvas.add(team1overs);
-
-            var team2score = new fabric.Text(document.getElementById('team2score').value, {
-                top: 674, left: 1272, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#ffd200', originX: 'right' 
-        });
-            canvas.add(team2score);
-
-            var team2overs = new fabric.Text(document.getElementById('team2overs').value, {
-                top: 676, left: 945, fontFamily: 'Roboto', fontSize: '38', fontWeight: 'normal', fill: '#ffd200' 
-        });
-            canvas.add(team2overs);
-            
+            textElements.forEach(({ value, top, left, fontSize, fill, fontWeight, originX }) => {
+                const text = new fabric.Text(document.getElementById(value).value, {
+                    top, left, fontFamily: 'Roboto', fontSize, fill, fontWeight, originX
+                });
+                canvas.add(text);
+            });
 
             canvas.renderAll();
-            var resultImage = canvas.toDataURL();
-
-                document.getElementById("preview").innerHTML = "";
-                var resultImageElement = document.createElement('img');
-                resultImageElement.src = resultImage;
-                document.getElementById("preview").appendChild(resultImageElement);
-           
-          /* canvas.renderAll();
-                var resultImage = canvas.toDataURL();
-
-                document.getElementById("preview").innerHTML = "";
-                var resultImageElement = document.createElement('img');
-                resultImageElement.src = resultImage;
-                document.getElementById("preview").appendChild(resultImageElement); */
-
-
-            }, { crossOrigin: 'Anonymous' });
-        });
-        
+            const resultImage = canvas.toDataURL();
+            document.getElementById("preview").innerHTML = "";
+            var resultImageElement = document.createElement('img');
+            resultImageElement.src = resultImage;
+            document.getElementById("preview").appendChild(resultImageElement);
+        }, { crossOrigin: 'Anonymous' });
+    });    
 </script>
 
 </body>
