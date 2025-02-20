@@ -34,7 +34,19 @@
 <body>
 
 <h1>VCC Match Summary Generator</h1>
-<button id="fetch-data">Fetch  Data</button>
+<h2>Match Details</h2>
+<form id="getMatchID">
+    <label for="matchdate">Enter the Date:</label>
+    <input type="date" id="matchdate" name="matchdate" required><br><br>
+    <label for="divisionid">Enter the Division:</label>
+    <select id="divisionid" name="divisionid" required>
+        <option value="" disabled selected>Select a division</option>
+        <option value="Division 7">Division 7</option>
+        <option value="Division 9">Division 9</option>
+    </select><br><br>
+    <button type="submit" id="match-id">Get Match Data</button>
+</form><br><br><br>
+
 <div id="result"></div>
 
 <h2>Match Summary</h2>
@@ -55,9 +67,12 @@
     <input type="text" id="title" name="title" ><br><br>
     <label for="subtitle">Subtitle:</label>
     <input type="text" id="subtitle" name="subtitle" ><br><br>
+    <div id="players"> </div>
+    <label for="matchresult">Match Result:</label>
+    <input type="text" id="matchresult" name="matchresult" ><br><br>
     <label for="mom">Man of the Match:</label>
     <input type="text" id="mom" name="man of the match" ><br><br>
-    <div id="players"> </div>
+    
 </form>
 <h3>Load Data To The Image</h3>
 <button id="load-data">Load Data</button>
@@ -90,23 +105,137 @@
             </div>
         `;
     });
-    document.getElementById('fetch-data').addEventListener('click', () => {
-        fetch('https://d8b3dbab-7f23-45cc-9288-4d4b19948f3c.mock.pstmn.io/get-matches')
-            .then(response => response.json())
+
+    document.getElementById('getMatchID').addEventListener('submit', (event) => {
+        event.preventDefault(); 
+        let divisionId;
+        const matchDate = document.getElementById('matchdate').value;
+        if(document.getElementById('divisionid').value === "Division 7"){
+            divisionId = 117014;
+        } else{
+            divisionId = 117025;
+        }
+    
+        console.log(`Selected Date: ${matchDate}`);
+        console.log(`Selected Division: ${divisionId}`);
+        const url = `https://play-cricket.com/api/v2/result_summary.json?site_id=22549&season=2024&api_token=4275205747dac2fce1f8679d083b6deb&from_match_date=${matchDate}&end_match_date=${matchDate}&division_id=${divisionId}`
+        fetch(url)
+            .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
             .then(data => {
-                const match = data.matches[0];
-                Object.keys(match).forEach(key => {
-                    const input = document.getElementById(key);
-                    if (input) {
-                        input.value = match[key];
-                    }
-                });
-            })
+            if (data.result_summary && data.result_summary.length > 0) {
+                const matchId = data.result_summary[0].id;
+                console.log(`Match ID: ${matchId}`); 
+                fetchMatchData(matchId);
+            } else {
+                document.getElementById('result').innerHTML = 'No match data available.';
+            }
+            
+        })
+
             .catch(error => {
                 document.getElementById('result').innerHTML = 'Error: ' + error.message;
             });
-        });
+    });
 
+    async function fetchMatchData(matchId) {
+    try {
+        const url = `https://play-cricket.com/api/v2/match_detail.json?&match_id=${matchId}&api_token=4275205747dac2fce1f8679d083b6deb`
+        const response = await fetch(url); // Replace with your actual API endpoint
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        
+        // Populate the input fields with the relevant data
+        populateMatchDetails(data.match_details[0]);
+    } catch (error) {
+        console.error('Error fetching match data:', error);
+    }
+}
+function populateMatchDetails(matchDetails) {
+    // Helper function to populate team information
+    const populateTeamInfo = (teamId, teamName, teamClub) => {
+        const teamInfo = `${teamClub} ${teamName}`;
+        const inningsData = matchDetails.innings.find(inn => inn.team_batting_id === teamId);
+        const title = `${matchDetails.league_name} ${matchDetails.competition_name}`;
+
+
+        document.getElementById('title').value = title;
+
+        // Populate team info
+        document.getElementById('team1').value = teamId === matchDetails.home_team_id ? teamInfo : document.getElementById('team1').value;
+        document.getElementById('team2').value = teamId === matchDetails.away_team_id ? teamInfo : document.getElementById('team2').value;
+
+        // Populate runs and overs
+        if (inningsData) {
+            document.getElementById(`${teamId === matchDetails.home_team_id ? 'team1' : 'team2'}score`).value = `${inningsData.runs}-${inningsData.wickets}` || '0';
+            document.getElementById(`${teamId === matchDetails.home_team_id ? 'team1' : 'team2'}overs`).value = inningsData.overs || '0';
+        }
+    };
+
+    // Populate home team info
+    populateTeamInfo(matchDetails.home_team_id, matchDetails.home_team_name, matchDetails.home_club_name);
+    
+    // Populate away team info
+    populateTeamInfo(matchDetails.away_team_id, matchDetails.away_team_name, matchDetails.away_club_name);
+    document.getElementById('subtitle').value = `${document.getElementById('team1').value} V/S ${document.getElementById('team2').value}`;
+    document.getElementById('matchresult').value = matchDetails.result_description;
+    // Function to get top 2 players by runs from innings
+    const getTopPlayersByRuns = (teamId) => {
+        const battingInnings = matchDetails.innings.find(inn => inn.team_batting_id === teamId);
+        return battingInnings?.bat
+            .filter(player => player.runs) // Ensure the player has runs recorded
+            .sort((a, b) => parseInt(b.runs) - parseInt(a.runs)) // Sort by runs descending
+            .slice(0, 2) || []; // Get top 2 players or return empty
+    };
+    const getTopBowlersByWickets = (teamId) => {
+        const bowlingInnings = matchDetails.innings.filter(inn => inn.team_batting_id !== teamId);
+        const bowlers = bowlingInnings.flatMap(inn => inn.bowl)
+            .filter(player => player.wickets) // Ensure the player has wickets recorded
+            .sort((a, b) => parseInt(b.wickets) - parseInt(a.wickets)) // Sort by wickets descending
+            .slice(0, 2); // Get top 2 bowlers
+        return bowlers;
+    };
+    
+
+    // Get top players for home and away teams
+    const topHomePlayers = getTopPlayersByRuns(matchDetails.home_team_id);
+    const topAwayPlayers = getTopPlayersByRuns(matchDetails.away_team_id);
+
+    // Populate team 1 players
+    document.getElementById('team1bm1').value = topHomePlayers[0]?.batsman_name || 'N/A';
+    document.getElementById('team1bm1score').value = topHomePlayers[0]?.runs || 'N/A';
+    document.getElementById('team1bm2').value = topHomePlayers[1]?.batsman_name || 'N/A';
+    document.getElementById('team1bm2score').value = topHomePlayers[1]?.runs || 'N/A';
+
+    // Populate team 2 players
+    document.getElementById('team2bm1').value = topAwayPlayers[0]?.batsman_name || 'N/A';
+    document.getElementById('team2bm1score').value = topAwayPlayers[0]?.runs || 'N/A';
+    document.getElementById('team2bm2').value = topAwayPlayers[1]?.batsman_name || 'N/A';
+    document.getElementById('team2bm2score').value = topAwayPlayers[1]?.runs || 'N/A';
+
+    const topHomeBowlers = getTopBowlersByWickets(matchDetails.home_team_id);
+    const topAwayBowlers = getTopBowlersByWickets(matchDetails.away_team_id);
+
+    document.getElementById('team1bl1').value = topHomeBowlers[0]?.bowler_name || 'N/A';
+    document.getElementById('team1bl1score').value = `${topHomeBowlers[0].wickets}/${topHomeBowlers[0].runs}`;
+    document.getElementById('team1bl2').value = topHomeBowlers[1]?.bowler_name || 'N/A';
+    document.getElementById('team1bl2score').value = `${topHomeBowlers[1].wickets}/${topHomeBowlers[1].runs}`;
+
+    // Populate away team bowlers
+    document.getElementById('team2bl1').value = topAwayBowlers[0]?.bowler_name || 'N/A';
+    document.getElementById('team2bl1score').value = `${topAwayBowlers[0].wickets}/${topAwayBowlers[0].runs}`;
+    document.getElementById('team2bl2').value = topAwayBowlers[1]?.bowler_name || 'N/A';
+    document.getElementById('team2bl2score').value = `${topAwayBowlers[1].wickets}/${topAwayBowlers[1].runs}`;
+
+}
+
+   
         document.getElementById('load-data').addEventListener('click', () => {
         var canvas = new fabric.Canvas('scorecardCanvas');
         var canvasDom = document.getElementById('scorecardCanvas');
@@ -142,6 +271,16 @@
                 { value: 'team2bl1score', top: 450, left: 1270, fontSize: 38, fill: '#ffd200', originX: 'right'},
                 { value: 'team2bl2', top: 558, left: 740, fontSize: 38, fill: '#ffd200', originX: 'left'},
                 { value: 'team2bl2score', top: 558, left: 1270, fontSize: 38, fill: '#ffd200', originX: 'right'},
+                { value: 'title', top: 162, left: 306, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#fff', originX: 'left', originY: 'center' },
+                { value: 'subtitle', top: 205, left: 306, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'normal', fill: '#ffcdc9', originX: 'left', originY: 'center' },
+                { value: 'mom', top: 453, left: 1580, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#431313', originX: 'center', shadow: new fabric.Shadow({
+                        color: '#dcfef9',
+                        blur: 2
+                    })},
+                {value: 'matchresult', top: 1002, left: 700, fontFamily: 'Roboto', fontSize: '32', fontWeight: 'bold', fill: '#ffc200', originX: 'center', shadow: new fabric.Shadow({
+                        color: '#000',
+                        blur: 2
+                    })}
             ];
 
             textElements.forEach(({ value, top, left, fontSize, fill, fontWeight, originX }) => {
