@@ -11,23 +11,100 @@
         rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+       body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+
+    h1, h2, h3 {
+        text-align: center;
+        color: #2c3e50;
+    }
+
+    form {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: 500;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        font-size: 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #2e86de;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #1b4f72;
+    }
+
+    #result {
+        background: #ecf0f1;
+        padding: 15px;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: 20px auto;
+        font-size: 16px;
+    }
+
+    #preview {
+        display: flex;
+        justify-content: center;
+        margin: 30px auto;
+        max-width: 100%;
+    }
+
+    #preview img {
+        max-width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    #players div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media screen and (max-width: 600px) {
+        form, #result {
+            padding: 15px;
         }
+
+        input, select {
+            font-size: 14px;
+        }
+
         button {
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
+            width: 100%;
         }
-        #result {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        form {
-            margin-top: 20px;
-        }
+    }
     </style>
      <script src="template.js"></script>
 </head>
@@ -74,8 +151,10 @@
     <input type="text" id="mom" name="man of the match" ><br><br>
     
 </form>
-<h3>Load Data To The Image</h3>
-<button id="load-data">Load Data</button>
+<h3 style="text-align: center;">Load Data To The Image</h3>
+<div style="text-align: center;">
+    <button id="load-data">Generate Match Summary Poster</button>
+</div>
 
 <div id="result"></div>
 <canvas style="display:none" id="scorecardCanvas"></canvas>
@@ -244,8 +323,15 @@ function populateMatchDetails(matchDetails) {
         canvasDom.height = 1080;
         canvas.width = 1920;
         canvas.height = 1080;
+        var imageurl = null;
+        if(document.getElementById('divisionid').value === "Division 7"){
+            imageurl = 'https://aashwin.github.io/vcc-poster-generator/assets/bluematchsummary2024.jpg'
+        } else{
+            imageurl = 'https://aashwin.github.io/vcc-poster-generator/assets/MatchSummary2024Red.jpg'
+        }
         // Load an image from a URL
-        fabric.Image.fromURL('https://aashwin.github.io/vcc-poster-generator/assets/MatchSummary2024Red.jpg', function(img) {
+        
+        fabric.Image.fromURL(imageurl, function(img) {
         
             canvas.add(img);
             const textElements = [
