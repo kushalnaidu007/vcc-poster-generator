@@ -190,14 +190,14 @@
         let divisionId;
         const matchDate = document.getElementById('matchdate').value;
         if(document.getElementById('divisionid').value === "Division 7"){
-            divisionId = 117014;
+            divisionId = 125959;
         } else{
-            divisionId = 117025;
+            divisionId = 125969;
         }
     
         console.log(`Selected Date: ${matchDate}`);
         console.log(`Selected Division: ${divisionId}`);
-        const url = `https://play-cricket.com/api/v2/result_summary.json?site_id=22549&season=2024&api_token=4275205747dac2fce1f8679d083b6deb&from_match_date=${matchDate}&end_match_date=${matchDate}&division_id=${divisionId}`
+        const url = `https://play-cricket.com/api/v2/result_summary.json?site_id=22549&season=2025&api_token=4275205747dac2fce1f8679d083b6deb&from_match_date=${matchDate}&end_match_date=${matchDate}&division_id=${divisionId}`
         fetch(url)
             .then(response => {
             if (!response.ok) {
@@ -224,7 +224,7 @@
     async function fetchMatchData(matchId) {
     try {
         const url = `https://play-cricket.com/api/v2/match_detail.json?&match_id=${matchId}&api_token=4275205747dac2fce1f8679d083b6deb`
-        const response = await fetch(url); // Replace with your actual API endpoint
+        const response = await fetch(url); 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -357,7 +357,7 @@ function populateMatchDetails(matchDetails) {
                 { value: 'team2bl1score', top: 450, left: 1270, fontSize: 38, fill: '#ffd200', originX: 'right'},
                 { value: 'team2bl2', top: 558, left: 740, fontSize: 38, fill: '#ffd200', originX: 'left'},
                 { value: 'team2bl2score', top: 558, left: 1270, fontSize: 38, fill: '#ffd200', originX: 'right'},
-                { value: 'title', top: 162, left: 306, fontFamily: 'Roboto', fontSize: '45', fontWeight: 'bold', fill: '#fff', originX: 'left', originY: 'center' },
+                { value: 'title', top: 162, left: 306, fontFamily: 'Roboto', fontSize: '35', fontWeight: 'bold', fill: '#fff', originX: 'left', originY: 'center' },
                 { value: 'subtitle', top: 205, left: 306, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'normal', fill: '#ffcdc9', originX: 'left', originY: 'center' },
                 { value: 'mom', top: 453, left: 1580, fontFamily: 'Roboto', fontSize: '30', fontWeight: 'bold', fill: '#431313', originX: 'center', shadow: new fabric.Shadow({
                         color: '#dcfef9',
